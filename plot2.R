@@ -5,6 +5,7 @@ mydata <- read.table(file = "household_power_consumption.txt",
                      sep = ";",
                      header = TRUE)
 
-png(file="plot1.png", width=480, height=480)
-qplot(Global_active_power, data=mydata, geom="histogram", binwidth = 0.5)
+mydata <- cbind(mydata, DateTime=strptime(paste(mydata$Date, mydata$Time), format="%Y-%m-%d %H:%M:%S"))
+png(file="plot2.png", width=480, height=480)
+qplot(DateTime, Global_active_power, data=mydata, geom="line")
 dev.off()
